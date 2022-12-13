@@ -11,6 +11,13 @@ describe("calculate feature",()=>{
         cy.get("[action=calculate]").should("exist")
     })
 
+    it("should return an error on nothing submitted", () => {
+        cy.get("[action=calculate]").click()
+    
+        cy.get("#ErrorMessage").should("exist")
+        cy.get("#ErrorMessage").contains("All fields are required")
+    })
+
     it("On success things will work fine", () => {
         
         cy.get("[placeholder=Operand one]").type("20")

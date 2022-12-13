@@ -6,8 +6,8 @@ import axios from "axios";
 
 function App() {
   const [operation, setOperation] = useState("+");
-  const [operand1, setOperand1] = useState(0);
-  const [operand2, setOperand2] = useState(0);
+  const [operand1, setOperand1] = useState();
+  const [operand2, setOperand2] = useState();
 
   const [error, setErorr] = useState("");
   const [isSuccess, setIsSucess] = useState(false);
@@ -22,6 +22,11 @@ function App() {
   };
 
   const calculate = () => {
+    if(operand1 == null || operand2 == null || operation == null || operand1 == "" || operand2 == ""){
+      setErorr("All fields are required")
+      return;
+    }
+
     axios
       .post("http://localhost:8000/api/v1/math", {
         operand1: parseFloat(operand1),
@@ -29,10 +34,15 @@ function App() {
         operation: operation,
       })
       .then((res) => {
-        console.warn(res);
+        setIsSucess(true);
         setResult(res.data.data);
+        setErorr("")
       })
-      .catch((err) => console.log(err, "error"));
+      .catch((err) => {
+        setIsSucess(false);
+        setResult(0);
+        setErorr(err.response.data.error)
+      });
   };
 
   const options = [
@@ -50,21 +60,21 @@ function App() {
   };
 
   return (
-    <div>
-      <h1 className="text-3xl font-medium" id="_calculate_page">
-        Calculate
+    <div className="app-div">
+      <h1 className="app-title" id="_calculate_page">
+        Nkubito Pacis Calculator
       </h1>
       {error !== "" && (
-        <div className="py-10 text-red-500 w-[400px]" id="ErrorMessage">
+        <div className="error-div" id="ErrorMessage">
           {error}
         </div>
       )}
       {isSuccess && (
         <div
-          className="py-10 text-lg text-green-500 w-[400px]"
+          className="success-div"
           id="SuccessMessage"
         >
-          Sucessfully Calculated :{result} ..
+          Sucessfully Calculated : {result}
         </div>
       )}
       <div>
@@ -72,11 +82,14 @@ function App() {
           defaultValue={operation}
           onChange={(value) => handleSelectChange({ ...value })}
           options={options}
+          placeholder={"Choose operation"}
+          className="select"
         />
         <Input
           type="number"
           placeholder="Operand one"
           data={{ st: operand1, sts: setOperand1 }}
+          required={true}
         />
         <Input
           type="number"

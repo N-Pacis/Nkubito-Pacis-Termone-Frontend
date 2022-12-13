@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+:root{
+    --main-app-blue-color: rgb(34, 128, 223);
+}
+
+body{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.app-title{
+    text-align: center;   
+    color: var(--main-app-blue-color);
+    font-weight: bold;
+}
+.error-div{
+    background-color: rgb(243, 96, 96);
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    padding: 1% 0% !important;
+    margin: 2% 0% !important;
+}
+.success-div{
+    background-color: rgb(62, 198, 80);
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    padding: 1% 0% !important;
+    margin: 2% 0% !important;
+}
+.app-div{
+    
+    width: 30%;
+    margin: 10% auto !important;
+}
+.input{
+    width: 90% !important;
+}
+input{
+    width: 100% !important;
+    padding: 3% 5% !important;
+    border: 1px solid rgb(197, 197, 197);
+    margin: 3% 0% !important;
+    border-radius: 5px;
+}
+input:focus{
+    outline: none;
+    border: 1px solid var(--main-app-blue-color);
+}
+input{
+    width: 100% !important;
+}
+
+.submit-btn{
+    background-color: var(--main-app-blue-color);
+    border: none;
+    border-radius: 5px;
+    padding: 3% 5%;
+    width: 100%;
+    color: #fff;
+    font-weight: bold;
+}
